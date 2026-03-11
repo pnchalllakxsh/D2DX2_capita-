@@ -62,8 +62,7 @@ export function Footer() {
                 { label: 'About', id: 'about' },
                 { label: 'Services', id: 'services' },
                 { label: 'Why D2DX2', id: 'why-d2dx2' },
-                { label: 'Journey', id: 'journey' },
-                { label: 'Leadership', id: 'leadership' }
+                { label: 'Journey', id: 'journey' }
               ].map((link, index) => (
                 <li key={index}>
                   <button

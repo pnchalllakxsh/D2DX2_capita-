@@ -38,7 +38,26 @@ export function WhyD2DX2() {
   ];
 
   return (
-    <section id="why-d2dx2" className="relative py-24 bg-white">
+    <section id="why-d2dx2" className="relative py-24 bg-white overflow-hidden">
+      {/* Animated Grid Background */}
+      <div className="absolute inset-0 pointer-events-none opacity-20">
+        <motion.div
+          className="w-full h-full"
+          style={{
+            backgroundImage: 'linear-gradient(#1e40af 1px, transparent 1px), linear-gradient(90deg, #1e40af 1px, transparent 1px)',
+            backgroundSize: '50px 50px',
+          }}
+          animate={{
+            backgroundPosition: ['0px 0px', '50px 50px'],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+        />
+      </div>
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div

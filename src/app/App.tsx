@@ -4,7 +4,6 @@ import { About } from './components/About';
 import { Services } from './components/Services';
 import { WhyD2DX2 } from './components/WhyD2DX2';
 import { Journey } from './components/Journey';
-import { Leadership } from './components/Leadership';
 import { Apply } from './components/Apply';
 import { Footer } from './components/Footer';
 
@@ -18,7 +17,6 @@ export default function App() {
         <Services />
         <WhyD2DX2 />
         <Journey />
-        <Leadership />
         <Apply />
       </main>
       <Footer />

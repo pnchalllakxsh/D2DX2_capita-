@@ -12,7 +12,31 @@ export function Journey() {
   ];
 
   return (
-    <section id="journey" className="relative py-24 bg-gradient-to-b from-gray-50 to-white">
+    <section id="journey" className="relative py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+      {/* Animated Dots Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(30)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-blue-400 rounded-full"
+            initial={{
+              x: Math.random() * 100 + '%',
+              y: Math.random() * 100 + '%',
+            }}
+            animate={{
+              y: [0, -15, 0],
+              opacity: [0.2, 0.6, 0.2],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 3,
+            }}
+          />
+        ))}
+      </div>
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div

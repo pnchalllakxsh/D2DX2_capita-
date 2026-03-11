@@ -1,7 +1,24 @@
-import { motion } from 'motion/react';
+import { motion, useMotionValue, useSpring } from 'motion/react';
 import { ArrowRight, Building2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export function Hero() {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -11,6 +28,49 @@ export function Hero() {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+      {/* Animated Cursor-Following Orbs */}
+      <motion.div
+        className="absolute w-96 h-96 rounded-full bg-gradient-to-r from-blue-400/20 to-cyan-400/20 blur-3xl pointer-events-none"
+        style={{
+          x: springX,
+          y: springY,
+          translateX: '-50%',
+          translateY: '-50%',
+        }}
+      />
+      <motion.div
+        className="absolute w-64 h-64 rounded-full bg-gradient-to-r from-purple-400/20 to-blue-400/20 blur-3xl pointer-events-none"
+        style={{
+          x: springX,
+          y: springY,
+          translateX: '-25%',
+          translateY: '-25%',
+        }}
+        transition={{ delay: 0.1 }}
+      />
+
+      {/* Floating particles */}
+      {[...Array(20)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-2 h-2 bg-blue-500/30 rounded-full"
+          initial={{
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            x: [0, Math.random() * 20 - 10, 0],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: 3 + Math.random() * 2,
+            repeat: Infinity,
+            delay: Math.random() * 2,
+          }}
+        />
+      ))}
+
       {/* Geometric Background Pattern */}
       <div className="absolute inset-0 opacity-40">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -90,32 +150,6 @@ export function Hero() {
             >
               Explore Services
             </button>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-16 max-w-5xl mx-auto"
-          >
-            {[
-              { number: '100+', label: 'Startups Supported' },
-              { number: '₹250Cr+', label: 'Capital Raised' },
-              { number: '50+', label: 'Strategic Partners' },
-              { number: '15+', label: 'Manufacturing Facilities' }
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.7 + index * 0.1 }}
-                className="p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all"
-              >
-                <div className="text-3xl md:text-4xl font-bold text-blue-700">{stat.number}</div>
-                <div className="text-gray-600 mt-2 font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
           </motion.div>
         </motion.div>
       </div>

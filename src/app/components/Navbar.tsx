@@ -28,7 +28,6 @@ export function Navbar() {
     { label: 'Services', id: 'services' },
     { label: 'Why D2DX2', id: 'why-d2dx2' },
     { label: 'Journey', id: 'journey' },
-    { label: 'Leadership', id: 'leadership' },
   ];
 
   return (

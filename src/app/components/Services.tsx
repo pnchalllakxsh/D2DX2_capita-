@@ -47,7 +47,25 @@ export function Services() {
   ];
 
   return (
-    <section id="services" className="relative py-24 bg-gradient-to-b from-gray-50 to-white">
+    <section id="services" className="relative py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+      {/* Animated Background Waves */}
+      <div className="absolute inset-0 pointer-events-none opacity-30">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-full h-1 bg-gradient-to-r from-transparent via-blue-300 to-transparent"
+            initial={{ x: '-100%', y: i * 150 }}
+            animate={{ x: '100%' }}
+            transition={{
+              duration: 8 + i * 2,
+              repeat: Infinity,
+              ease: 'linear',
+              delay: i * 1.5,
+            }}
+          />
+        ))}
+      </div>
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div

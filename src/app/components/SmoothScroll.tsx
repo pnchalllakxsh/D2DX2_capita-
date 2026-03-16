@@ -4,9 +4,10 @@ import Lenis from 'lenis';
 export function SmoothScroll() {
   useEffect(() => {
     const lenis = new Lenis({
-      lerp: 0.13,
-      wheelMultiplier: 1.05,
-      touchMultiplier: 1.1,
+      // Near-native speed with subtle smoothing
+      lerp: 0.2,
+      wheelMultiplier: 1.12,
+      touchMultiplier: 1,
       smoothWheel: true,
       syncTouch: false,
       infinite: false,
